@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Square Number Quiz</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+      }
+      .message {
+        font-size: 1.5rem;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="quiz-container">
+      <h1>Square Number Quiz</h1>
+      <button id="start-quiz">Start Quiz</button>
+      <p class="message" id="result-message"></p>
+    </div>
+
+    <script>
+      document.getElementById("start-quiz").addEventListener("click", () => {
+        const randomNumber = Math.floor(Math.random() * 100) + 1; // Generate a number between 1 and 100
+        const square = randomNumber * randomNumber;
+
+        const isNumberToSquare = Math.random() > 0.5;
+
+        let question, correctAnswer;
+        if (isNumberToSquare) {
+          question = `What is the square of ${randomNumber}?`;
+          correctAnswer = square;
+        } else {
+          question = `What number squared equals ${square}?`;
+          correctAnswer = randomNumber;
+        }
+
+        const userAnswer = prompt(question);
+        const messageElement = document.getElementById("result-message");
+
+        if (userAnswer === null) {
+          messageElement.textContent = "Quiz cancelled.";
+          return;
+        }
+
+        if (parseInt(userAnswer) === correctAnswer) {
+          messageElement.textContent = "Benar!";
+          messageElement.style.color = "green";
+        } else {
+          messageElement.textContent = `Salah! Jawaban yang benar adalah ${correctAnswer}.`;
+          messageElement.style.color = "red";
+        }
+      });
+    </script>
+  </body>
+</html>
